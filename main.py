@@ -1,5 +1,7 @@
 from langchain_ollama import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
+import datetime
+import webbrowser
 
 template = """
 Answer the question below.
@@ -35,6 +37,15 @@ if __name__ == "__main__":
         query = input("You: ")
         if query.lower() == "exit":
             break
+        elif 'what is the time' in query:
+            strTime = datetime.datetime.now().strftime("%H:%M:%S")    
+            print(f"Orion 1.0: The time is {strTime}")
+            continue
+            
+        elif 'open youtube' in query:
+            print("Orion 1.0: Opening youtube")
+            webbrowser.open('https://www.youtube.com/') 
+
         print("Thinking...\n")
         result = chain.invoke({"context": context, "question": query})
         print("Orion 1.0: ",result)
